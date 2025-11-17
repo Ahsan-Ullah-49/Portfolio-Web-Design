@@ -1,0 +1,630 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Applying Inter as the default font */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #080808;
+            /* Dark background */
+            color: #E5E7EB;
+            /* Light text */
+        }
+
+        /* Custom purple gradient for buttons and highlights */
+        .purple-gradient {
+            background-image: linear-gradient(to right, #C026D3, #7C3AED);
+        }
+
+        .purple-text {
+            color: #A855F7;
+            /* Bright purple accent */
+        }
+
+        /* --- CONTACT FORM STYLES (Soft Pulse) --- */
+        .form-input-glow:focus {
+            --tw-ring-color: #A855F7;
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.5);
+            border-color: #A855F7;
+        }
+
+        .form-card-glow {
+            border: 2px solid #3c0c50;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+            animation: soft-pulse-glow 1s infinite alternate ease-in-out;
+            border-radius: 0.75rem;
+            background-color: #1A1A1A;
+        }
+
+        @keyframes soft-pulse-glow {
+            0% {
+                box-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
+            }
+
+            100% {
+                box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
+            }
+        }
+
+        /* --- ORBITRON LOGO STYLES (No Neon Glow on Text) --- */
+        .neon-logo {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* --- Nav link hover effect --- */
+        .nav-link {
+            position: relative;
+            text-decoration: none;
+            color: #D1D5DB;
+            transition: color 0.3s ease-in-out;
+            padding-bottom: 6px;
+        }
+
+        .nav-link:hover {
+            color: #FFFFFF;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #A855F7;
+            transform: scaleX(0);
+            transform-origin: bottom left;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* --- Logo Static Lightning Frame (Enhanced, No animation) --- */
+        .logo-container {
+            position: relative;
+            padding: 0.5rem 0.75rem;
+            /* Padding defines the distance between text and outline */
+            border-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            z-index: 10;
+            background-color: transparent;
+            overflow: hidden;
+            /* Important for containing the glow effect */
+        }
+
+        .logo-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 0.5rem;
+            /* Enhanced static box shadow for a "lightning frame" look */
+            box-shadow:
+                0 0 5px #A855F7,
+                /* Inner highlight */
+                0 0 15px rgba(168, 85, 247, 1),
+                /* Stronger center glow */
+                0 0 30px rgba(192, 38, 211, 0.8);
+            /* Wider magenta bloom */
+            /* Added a defined border */
+            border: 2px solid rgba(168, 85, 247, 0.8);
+            z-index: 1;
+            /* Below the mask and text */
+            pointer-events: none;
+        }
+
+        .logo-container::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background-color: #080808;
+            border-radius: 0.4rem;
+            z-index: 2;
+            /* Place above the ::before glow (the mask) */
+            pointer-events: none;
+        }
+
+        .logo-text {
+            position: relative;
+            z-index: 3;
+        }
+
+
+        /* --- Project Card Hover Effect --- */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 10;
+        }
+
+        /* Default state shadow */
+        .project-card:not(:hover) {
+            box-shadow: 0 0 5px rgba(168, 85, 247, 0.15);
+        }
+
+        /* Hover scale and strong base shadow */
+        .project-card:hover {
+            transform: scale(1.01);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
+            animation: subtle-flicker 0.15s infinite alternate;
+        }
+
+        /* Inner card content lift and background shift on hover */
+        .project-card-inner {
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+            background-color: #1A1A1A;
+            /* Base color */
+        }
+
+        .project-card:hover .project-card-inner {
+            background-color: #1f1f1f;
+            /* Slightly darker inner background on hover */
+            transform: translateY(-3px);
+            /* Subtle lift for inner content */
+        }
+
+        /* Lightning Effect Pseudo-element (The rotating glow for projects) */
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: -200%;
+            left: -200%;
+            width: 500%;
+            height: 500%;
+            background: conic-gradient(from 0deg, rgba(192, 38, 211, 0) 0%, rgba(168, 85, 247, 0.5) 45%, rgba(68, 68, 255, 0.5) 55%, rgba(192, 38, 211, 0) 100%);
+            z-index: -1;
+            opacity: 0;
+            filter: blur(20px);
+            transition: opacity 0.4s ease-in-out;
+            animation: none;
+        }
+
+        /* Show and animate the glow on hover */
+        .project-card:hover::before {
+            opacity: 1;
+            animation: lightning-rotation 6s linear infinite;
+        }
+
+        @keyframes lightning-rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Keyframes for the subtle box-shadow flicker */
+        @keyframes subtle-flicker {
+            0% {
+                box-shadow: 0 0 30px rgba(168, 85, 247, 0.6), 0 0 2px rgba(255, 255, 255, 0.2);
+            }
+
+            100% {
+                box-shadow: 0 0 32px rgba(168, 85, 247, 0.7), 0 0 4px rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        /* Stop the flicker when not hovering */
+        .project-card:not(:hover) {
+            animation: none;
+        }
+
+
+        /* --- Hero Image Frame GLITCH & LIGHTNING EFFECT --- */
+        :root {
+            --glitch-image-url: url('https://placehold.co/400x400/222233/A855F7?text=Ahsan+Ullah');
+        }
+
+        .hero-image-frame {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            border: 2px solid #A855F7;
+            transition: transform 1.0s ease-in-out;
+            /* Combined animations: Glitch color, Glitch move, and the new rapid Electric Flicker */
+            animation: glitch-color 2s infinite linear alternate,
+                glitch-move 1s infinite steps(1),
+                electric-flicker 0.1s infinite alternate;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+            /* Base shadow */
+        }
+
+        .hero-image-frame:hover {
+            transform: scale(1.02);
+            /* Enhanced shadow on hover */
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.8), 0 0 50px rgba(192, 38, 211, 0.6);
+        }
+
+        /* New Keyframes for the rapid electric/lightning flicker border */
+        @keyframes electric-flicker {
+            0% {
+                box-shadow: 0 0 5px #A855F7, 0 0 10px #C026D3;
+            }
+
+            50% {
+                box-shadow: 0 0 10px #A855F7, 0 0 20px #C026D3, 0 0 0 rgba(255, 255, 255, 0.1);
+            }
+
+            100% {
+                box-shadow: 0 0 15px #A855F7, 0 0 30px #C026D3, 0 0 40px rgba(255, 255, 255, 0.1);
+            }
+        }
+
+
+        .hero-image-frame img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes glitch-color {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+
+            33% {
+                filter: hue-rotate(30deg);
+            }
+
+            66% {
+                filter: hue-rotate(-30deg);
+            }
+
+            100% {
+                filter: hue-rotate(0deg);
+            }
+        }
+
+        @keyframes glitch-move {
+            0% {
+                transform: translate(1px, 1px);
+            }
+
+            25% {
+                transform: translate(-1px, -1px);
+            }
+
+            50% {
+                transform: translate(1px, -1px);
+            }
+
+            75% {
+                transform: translate(-1px, 1px);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        .hero-image-frame::before,
+        .hero-image-frame::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: var(--glitch-image-url);
+            background-size: cover;
+            background-position: center;
+            border-radius: 0.5rem;
+            z-index: 1;
+            opacity: 0.8;
+        }
+
+        .hero-image-frame::before {
+            background-blend-mode: hard-light;
+            background-color: #ff00c1;
+            clip-path: inset(45% 0 15% 0);
+            animation: glitch-before 0.2s infinite alternate-reverse;
+        }
+
+        .hero-image-frame::after {
+            background-blend-mode: hard-light;
+            background-color: #00e0ff;
+            clip-path: inset(10% 0 65% 0);
+            animation: glitch-after 0.3s infinite alternate;
+        }
+
+        @keyframes glitch-before {
+            0% {
+                transform: translate(0);
+                clip-path: inset(5% 0 85% 0);
+            }
+
+            20% {
+                transform: translate(-5px, 0);
+                clip-path: inset(30% 0 40% 0);
+            }
+
+            40% {
+                transform: translate(5px, 0);
+                clip-path: inset(10% 0 70% 0);
+            }
+
+            60% {
+                transform: translate(0);
+                clip-path: inset(15% 0 65% 0);
+            }
+
+            80% {
+                transform: translate(-3px, 0);
+                clip-path: inset(70% 0 10% 0);
+            }
+
+            100% {
+                transform: translate(3px, 0);
+                clip-path: inset(20% 0 60% 0);
+            }
+        }
+
+        @keyframes glitch-after {
+            0% {
+                transform: translate(0);
+                clip-path: inset(70% 0 10% 0);
+            }
+
+            20% {
+                transform: translate(3px, 0);
+                clip-path: inset(15% 0 65% 0);
+            }
+
+            40% {
+                transform: translate(-3px, 0);
+                clip-path: inset(50% 0 40% 0);
+            }
+
+            60% {
+                transform: translate(0);
+                clip-path: inset(80% 0 5% 0);
+            }
+
+            80% {
+                transform: translate(5px, 0);
+                clip-path: inset(60% 0 20% 0);
+            }
+
+            100% {
+                transform: translate(-5px, 0);
+                clip-path: inset(75% 0 10% 0);
+            }
+        }
+
+        /* --- End of Hero Image Glitch/Lightning Effect --- */
+
+        /* --- Header Styles (Glassy & Outline) --- */
+        .glassy-header {
+            /* Glassy effect: Blur the backdrop */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            /* For Safari support */
+            /* Add a static outline to the entire header container */
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            /* Ensure background is slightly transparent for the blur to work */
+            background-color: #080808a0;
+        }
+
+        /* --- Skill Bar Animation & Scroll Reveal --- */
+        .skill-bar-track {
+            background-color: #1A1A1A;
+        }
+
+        .skill-bar-fill {
+            background-image: linear-gradient(to right, #A855F7, #C026D3);
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+            width: 0%;
+            transition: width 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #A855F7;
+            border-radius: 9999px;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* --- Footer Styling --- */
+        .neon-footer {
+            background-color: #000;
+            padding: 50px 0 30px;
+            text-align: center;
+            position: relative;
+            color: #fff;
+            font-family: "Orbitron", sans-serif;
+        }
+
+        /* --- Logo --- */
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo span {
+            color: #8a2be2;
+            /* Neon Purple */
+        }
+
+        /* --- Tagline --- */
+        .footer-text {
+            color: #aaa;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ICON CONTAINER — row layout */
+        .icons {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            /* same spacing as before */
+            padding: 40px 0;
+        }
+
+        /* ICON BUTTONS — Default Purple + Neon Hover */
+        .social-icon {
+            width: 80px;
+            /* same old size */
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(138, 43, 226, 0.15);
+            border: 1px solid rgba(138, 43, 226, 0.5);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            color: #a855f7;
+            /* DEFAULT PURPLE ICON */
+            font-size: 2rem;
+
+            transition: 0.3s ease;
+        }
+
+        /* HOVER EFFECT — neon purple */
+        .social-icon:hover {
+            background: #a855f7;
+            color: #000;
+            transform: translateY(-6px) scale(1.05);
+            box-shadow:
+                0 0 15px #a855f7,
+                0 0 30px #9333ea;
+            border-color: #a855f7;
+        }
+
+        /* --- Full Width Divider --- */
+        .footer-line-full {
+            width: 100vw;
+            /* Full screen width */
+            height: 1px;
+            background-color: rgba(168, 85, 247, 0.3);
+            box-shadow: 0 0 5px #a855f7, 0 0 15px #a855f7;
+            margin: 2rem 0;
+        }
+
+        /* --- Copyright --- */
+        .copyright {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        /* SUCCESS POPUP CARD - Centered */
+        .success-card {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            background: #1a1a1a;
+            padding: 30px 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid rgba(168, 85, 247, 0.5);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5),
+                0 0 40px rgba(168, 85, 247, 0.3);
+            z-index: 9999;
+            opacity: 0;
+            transition: all 0.4s ease;
+            display: none;
+        }
+
+        .success-card.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .success-icon-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        /* SVG Circle Background */
+        .success-check {
+            width: 80px;
+            height: 80px;
+            overflow: visible;
+        }
+
+        .success-circle-bg {
+            fill: none;
+            stroke: #a855f7;
+            stroke-width: 4;
+            stroke-opacity: 0.5;
+            filter: drop-shadow(0 0 10px #a855f7);
+        }
+
+        /* Checkmark path animation */
+        .success-checkmark {
+            stroke-dasharray: 60;
+            stroke-dashoffset: 60;
+            animation: drawCheck 0.6s ease forwards 0.2s;
+            /* delay to sync with popup */
+            filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 15px #a855f7);
+        }
+
+        @keyframes drawCheck {
+            0% {
+                stroke-dashoffset: 60;
+            }
+
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .success-text {
+            margin-top: 5px;
+            font-size: 1.4rem;
+            color: #d8b4fe;
+            font-weight: 600;
+        }
+
+        /* END OF STYLE.CSS */
